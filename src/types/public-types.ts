@@ -10,12 +10,26 @@ export enum ViewMode {
   Year = "Year",
 }
 export type TaskType = "task" | "milestone" | "project";
+
+export interface ExtraFieldType {
+  label:string;
+  displayValue:string;
+  visibleTable:boolean;
+  color?:string;
+  background?:string;
+  value?:string;
+  initial?:string;
+}
+
+
 export interface Task {
   id: string;
   type: TaskType;
   name: string;
   start: Date;
   end: Date;
+  extraField: ExtraFieldType[];
+  extraFieldLabel: string;
   /**
    * From 0 to 100
    */

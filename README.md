@@ -140,9 +140,20 @@ npm start
 | isDisabled     | bool     | Disables all action for current task.                                                                 |
 | fontSize       | string   | Specifies the taskbar font size locally.                                                              |
 | project        | string   | Task project name                                                                                     |
-| hideChildren   | bool     | Hide children items. Parameter works with project type only                                           |
+| hideChildren   | bool     | Hide children items. Parameter works with project type |
+| extraFieldLabel   | String     | Extra field Header label |
+| extraField   | array     |  [
+        {
+          displayValue:'Sonu Progress',
+          initial:'SV',
+          visibleTable:true,
+          background : '#f44336'
+          color : '#fff'
+        },]
+        background,color,visibleTable are optional
+         only                                           |
 
-\*Required
+\*Required  
 
 ## License
 

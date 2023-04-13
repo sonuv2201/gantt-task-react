@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./task-list-header.module.css";
+import { Task } from "../../types/public-types";
+// import { ExtraFieldType } from "../../types/public-types";
 
 export const TaskListHeaderDefault: React.FC<{
   headerHeight: number;
   rowWidth: string;
   fontFamily: string;
   fontSize: string;
-}> = ({ headerHeight, fontFamily, fontSize, rowWidth }) => {
+  tasks?: Task[];
+}> = ({ headerHeight, fontFamily, fontSize, rowWidth, tasks }) => {
+
+  const [customLabel,setCustomLabel] = useState('Team');
+
+  useEffect(()=>{
+    tasks?.map(t => {
+      setCustomLabel(t?.extraFieldLabel)
+    })
+  },[])
+
   return (
     <div
       className={styles.ganttTable}
@@ -59,6 +71,38 @@ export const TaskListHeaderDefault: React.FC<{
         >
           &nbsp;To
         </div>
+
+        <div
+          className={styles.ganttTable_HeaderItem}
+          style={{
+            minWidth: rowWidth,
+          }}
+        >
+          &nbsp;{customLabel}
+        </div>
+
+        {/* {tasks?.map(t => {
+          return (
+            t?.extraField?.map((fItem: ExtraFieldType, index: number) => {
+              if (fItem?.visibleTable) {
+                return <div
+                  key={index}
+                  className={styles.ganttTable_HeaderItem}
+                  style={{
+                    minWidth: rowWidth,
+                  }} 
+                >
+                  {fItem.label}
+                </div>
+              } else {
+                return null
+              }
+
+            })
+          )
+        })} */}
+
+
       </div>
     </div>
   );
