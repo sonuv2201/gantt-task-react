@@ -3,7 +3,7 @@ import { Task, ViewMode, Gantt } from "gantt-task-react";
 import { ViewSwitcher } from "./components/view-switcher";
 import { getStartEndDateForProject, initTasks } from "./helper";
 import "gantt-task-react/dist/index.css";
-
+ 
 // Init
 const App = () => {
   const [view, setView] = React.useState<ViewMode>(ViewMode.Day);
@@ -56,6 +56,7 @@ const App = () => {
 
   const handleClick = (task: Task) => {
     console.log("On Click event Id:" + task.id);
+    console.log(task);
   };
 
   const handleSelect = (task: Task, isSelected: boolean) => {
@@ -88,6 +89,7 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
       />
+      
       <h3>Gantt With Limited Height</h3>
       <Gantt
         tasks={tasks}

@@ -2,7 +2,7 @@ import { Task } from "../../dist/types/public-types";
 
 export function initTasks() {
   const currentDate = new Date();
-  const tasks: Task[] = [
+  const tasks: any = [
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -12,6 +12,7 @@ export function initTasks() {
       type: "project",
       hideChildren: false,
       displayOrder: 1,
+      
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
@@ -28,6 +29,27 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 2,
+      extraFieldLabel:'Teamss',
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Sonu Progress',
+          initial:'SV',
+          visibleTable:true,
+        },
+        {
+          label:'Akhil Progress',
+          displayValue:'Akhil Progress',
+          initial:'AK',
+          visibleTable:true,
+        },
+        {
+          label:'Nishant Progress',
+          displayValue:'Nishant Progress',
+          initial:'N',
+          visibleTable:true,
+        }
+      ],
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
@@ -39,6 +61,13 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 3,
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 1',
+          initial:'SV'
+        }
+      ],
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
@@ -50,6 +79,13 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 4,
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 1',
+          initial:'SV'
+        }
+      ],
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -61,6 +97,13 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 5,
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 1',
+          initial:'SV'
+        }
+      ],
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
@@ -72,6 +115,13 @@ export function initTasks() {
       dependencies: ["Task 2"],
       project: "ProjectSample",
       displayOrder: 6,
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 1',
+          initial:'SV'
+        }
+      ],
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -92,6 +142,18 @@ export function initTasks() {
       progress: 0,
       isDisabled: true,
       type: "task",
+      extraField: [
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 1',
+          initial:'SV'
+        },
+        {
+          label:'Sonu Progress',
+          displayValue:'Extra Filed 2',
+          initial:'SV'
+        }
+      ],
     },
   ];
   return tasks;
