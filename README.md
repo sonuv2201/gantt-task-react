@@ -142,7 +142,9 @@ npm start
 | project        | string   | Task project name                                                                                     |
 | hideChildren   | bool     | Hide children items. Parameter works with project type |
 | extraFieldLabel   | String     | Extra field Header label |
-| extraField   | array     |  [
+| extraField   | array     |  extraField[]  background,color,visibleTable are optional |
+         only     |
+    [
         {
           displayValue:'Sonu Progress',
           initial:'SV',
@@ -150,8 +152,7 @@ npm start
           background : '#f44336'
           color : '#fff'
         },]
-        background,color,visibleTable are optional
-         only                                           |
+                                             |
 
 \*Required  
 
