@@ -12,7 +12,6 @@ export function initTasks() {
       type: "project",
       hideChildren: false,
       displayOrder: 1,
-      
     },
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
@@ -30,22 +29,22 @@ export function initTasks() {
       project: "ProjectSample",
       displayOrder: 2,
       extraFieldLabel:'Teamss',
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Sonu Progress',
+          name:'Sonu',
+          username:'Sonu Progress',
           initial:'SV',
           visibleTable:true,
         },
         {
-          label:'Akhil Progress',
-          displayValue:'Akhil Progress',
+          name:'Akhil',
+          username:'Akhil Progress',
           initial:'AK',
           visibleTable:true,
         },
         {
-          label:'Nishant Progress',
-          displayValue:'Nishant Progress',
+          name:'Nishant',
+          username:'Nishant Progress',
           initial:'N',
           visibleTable:true,
         }
@@ -61,11 +60,24 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 3,
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 1',
-          initial:'SV'
+          name:'Sonu',
+          username:'Sonu Progress',
+          initial:'SV',
+          visibleTable:true,
+        },
+        {
+          name:'Akhil',
+          username:'Akhil Progress',
+          initial:'AK',
+          visibleTable:true,
+        },
+        {
+          name:'Nishant',
+          username:'Nishant Progress',
+          initial:'N',
+          visibleTable:true,
         }
       ],
     },
@@ -79,12 +91,13 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 4,
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 1',
-          initial:'SV'
-        }
+          name:'Sonu',
+          username:'Extra Filed 1',
+          initial:'SV',
+          visibleTable:true,
+        },
       ],
     },
     {
@@ -97,11 +110,12 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 5,
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 1',
-          initial:'SV'
+          name:'Sonu',
+          username:'Extra Filed 1',
+          initial:'SV',
+          visibleTable:true,
         }
       ],
     },
@@ -115,11 +129,12 @@ export function initTasks() {
       dependencies: ["Task 2"],
       project: "ProjectSample",
       displayOrder: 6,
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 1',
-          initial:'SV'
+          name:'Sonu',
+          username:'Extra Filed 1',
+          initial:'SV',
+          visibleTable:true,
         }
       ],
     },
@@ -142,16 +157,18 @@ export function initTasks() {
       progress: 0,
       isDisabled: true,
       type: "task",
-      extraField: [
+      team: [
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 1',
-          initial:'SV'
+          name:'Sonu',
+          username:'Extra Filed 1',
+          initial:'SV',
+          visibleTable:true,
         },
         {
-          label:'Sonu Progress',
-          displayValue:'Extra Filed 2',
-          initial:'SV'
+          name:'Sonu Progress',
+          username:'Extra Filed 2',
+          initial:'SV',
+          visibleTable:true,
         }
       ],
     },
