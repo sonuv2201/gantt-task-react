@@ -78,7 +78,7 @@ export const TaskListHeaderDefault: React.FC<{
             minWidth: rowWidth,
           }}
         >
-          &nbsp;{customLabel}
+          &nbsp;{customLabel || "Team"}
         </div>
 
         {/* {tasks?.map(t => {

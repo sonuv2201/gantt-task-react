@@ -138,8 +138,18 @@ export const StandardTooltipContent: React.FC<{
       )}
 
       <p className={styles.tooltipDefaultContainerParagraph}>
-        {!!task.progress && `Progress: ${task.progress} %`}
+        {!!task.progress && `Progress: ${task.progress} %`} 
+      </p>
+
+      <p className={styles.tooltipDefaultContainerParagraph}>
+        {!!task.team && <TeamDisplay teamData={task.team} />} 
       </p>
     </div>
   );
 };
+
+const TeamDisplay = ({teamData}:any) =>{
+  return <span> <span>Team: </span> 
+    { teamData.map((item:any,index:number,arr:any)=><span key={index}>{item.name}{arr.length -1 !== index && ', '}</span>) }
+  </span>
+}

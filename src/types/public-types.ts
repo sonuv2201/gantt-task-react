@@ -11,9 +11,9 @@ export enum ViewMode {
 }
 export type TaskType = "task" | "milestone" | "project";
 
-export interface ExtraFieldType {
-  label:string;
-  displayValue:string;
+export interface TeamType {
+  name:string;
+  username:string;
   visibleTable:boolean;
   color?:string;
   background?:string;
@@ -28,7 +28,7 @@ export interface Task {
   name: string;
   start: Date;
   end: Date;
-  extraField: ExtraFieldType[];
+  team: TeamType[];
   extraFieldLabel: string;
   /**
    * From 0 to 100

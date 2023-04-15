@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
-import { ExtraFieldType } from "../../types/public-types";
+import { TeamType } from "../../types/public-types";
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
   (locale: string) =>
@@ -31,6 +31,7 @@ export const TaskListTableDefault: React.FC<{
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
+  onTableClick: (task: Task) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -39,15 +40,20 @@ export const TaskListTableDefault: React.FC<{
   fontSize,
   locale,
   onExpanderClick,
+  onTableClick,
 }) => {
     const toLocaleDateString = useMemo(
       () => toLocaleDateStringFactory(locale),
       [locale]
     );
 
+    const handleTableClick = (t:any) =>{
+      onExpanderClick(t);
+    }
+
     return (
       <div
-        className={styles.taskListWrapper}
+        className={`${styles.taskListWrapper} gantTableWrapper`}
         style={{
           fontFamily: fontFamily,
           fontSize: fontSize,
@@ -61,22 +67,25 @@ export const TaskListTableDefault: React.FC<{
           } else if (t.hideChildren === true) {
             expanderSymbol = "▶";
           }
-          
+
           return (
             <div
-              className={styles.taskListTableRow}
+              className={`${styles.taskListTableRow} gantTableRow`}
               style={{ height: rowHeight }}
               key={`${t.id}row`}
+              onClick={() => handleTableClick(t)}
             >
               <div
-                className={styles.taskListCell}
+                className={`${styles.taskListCell} gantTableCell`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
                 }}
+                
                 title={`${t.name}`}
+                onClick={()=>onTableClick(t)}
               >
-                <div className={styles.taskListNameWrapper}>
+                <div className={`${styles.taskListNameWrapper} taskListNameWrapper`}>
                   <div
                     className={
                       expanderSymbol
@@ -100,7 +109,7 @@ export const TaskListTableDefault: React.FC<{
                 &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
               </div>
               <div
-                className={styles.taskListCell}
+                className={`${styles.taskListCell} taskListCell`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
@@ -111,32 +120,15 @@ export const TaskListTableDefault: React.FC<{
 
 
               <div
-                className={styles.taskListCell}
+                className={`${styles.taskListCell} taskListCell`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
-                  position:'relative'
+                  position: 'relative'
                 }}
               >
-                <DisplayExtraFiled t={t} rowWidth={rowWidth} /> 
+                <DisplayExtraFiled t={t} rowWidth={rowWidth} />
               </div>
-
-              {/* {
-              t?.extraField.map((item:any,index:number)=>{
-                return(<div
-                  key={index}
-                  className={styles.taskListCell}
-                  style={{
-                    minWidth: rowWidth,
-                    maxWidth: rowWidth,
-                  }}
-                >
-                  &nbsp;  
-                </div>)
-              })
-            } */}
-
-
             </div>
           );
         })}
@@ -146,42 +138,31 @@ export const TaskListTableDefault: React.FC<{
 
 
 
-  const DisplayExtraFiled = ({t,rowWidth}:any) =>{
-    let [teamOpen,setTeamOpen] = React.useState(false)
+const DisplayExtraFiled = ({ t, rowWidth }: any) => {
+  let [teamOpen, setTeamOpen] = React.useState(false)
 
-    const listRef = React.useRef<HTMLDivElement>(null)
+  const listRef = React.useRef<HTMLDivElement>(null)
 
-    React.useEffect(()=>{
-      document.addEventListener('click',clickHandle)
-    },[])
+  React.useEffect(() => {
+    document.addEventListener('click', clickHandle)
+  }, [])
 
-    const clickHandle = (event:any) =>{
-      if(listRef.current && !listRef.current.contains(event.target)){
-        setTeamOpen(false);
-      }
+  const clickHandle = (event: any) => {
+    if (listRef.current && !listRef.current.contains(event.target)) {
+      setTeamOpen(false);
     }
-    
-    return(<div className={`childList ${teamOpen ? 'active' : ''}`} ref={listRef}>
+  }
+
+  return (<div className={`childList ${teamOpen ? 'active' : ''} tableTeamName`} style={{
+    minWidth: rowWidth,
+    maxWidth: rowWidth,
+  }} ref={listRef}>
     {
-      t?.extraField?.map((fItem: ExtraFieldType, index: number,arr:any) => {
-        if (fItem?.visibleTable) {
-          return <div
-            key={index}
-
-            style={{
-              minWidth: rowWidth,
-              maxWidth: rowWidth,
-            }}
-          >
-            { index === 0 &&  <p onClick={()=> setTeamOpen((prev)=>!prev) } style={{cursor:"pointer",marginBottom:teamOpen ?'0' : '14px'}}>{teamOpen ? '▼' : '▶'}  {fItem.displayValue} </p> } 
-            { index !== 0 && teamOpen && <p style={{paddingLeft:'18px',margin:'0', paddingBottom: arr.length-1 === index ? '14px' : '' }}>{fItem.displayValue}</p>}
-             
-          </div>
-        } else {
-          return null
-        }
-
+      t?.team?.map((fItem: TeamType, index: number, arr: any) => {
+        return <span key={index}>
+          {fItem.name}{arr.length - 1 !== index && ', '}
+        </span>
       })
     }
   </div>)
-  }
+}

@@ -128,7 +128,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
           {task.name}
         </text>
 
-        {task?.extraField?.map((item, index) => {
+        {task?.team?.map((item, index) => {
 
           let old_X = getX();
           if (groupRef.current && isTextInside) {
