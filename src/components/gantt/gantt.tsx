@@ -467,17 +467,28 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   };
 
   const HandleOutsideClick = (task:any) =>{
+    console.log(task)
     setParserData(task)
-    if(extraFunction){
-      extraFunction(parserData);
-    }
   }
 
+  const [popupStatus,setPopupStatus] = React.useState(false); 
+  const [propsColumn,setPropsColumn] = React.useState([]); 
+
+  useEffect(()=>{
+    setPropsColumn(children?.props)
+  },[children?.props])
+
+  console.log({children})
+
   return (
-    <GantContext.Provider value={{HandleOutsideClick}}>
+    <GantContext.Provider value={{HandleOutsideClick,setPopupStatus,propsColumn}}>
       {
         children && React.Children.map(children, (child: React.ReactElement) => {
-          return React.cloneElement(child, parserData);
+          return React.cloneElement(child, {
+            data:parserData,
+            status:popupStatus,
+            setStatus:setPopupStatus
+          });
         })
       }
       {/* {children} */}

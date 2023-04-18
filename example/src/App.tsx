@@ -75,9 +75,13 @@ const App = () => {
   //   console.log(parserData)
   // }
 
-  const APP2 = (props:any) =>{
-    console.log(props)
-    return <p>{JSON.stringify(props)}</p>
+  const APP2 = ({data,status,setStatus}:any) =>{
+    console.log(data)
+    return <>
+    <p>{String(data)}</p>
+    <p>{String(status)}</p>
+    <p className="false" onClick={()=>setStatus(false)}>close</p>
+    </>
   }
 
   return (
@@ -103,7 +107,7 @@ const App = () => {
         barCornerRadius={0}
         // extraFunction={extraFunction}
       >
-        <APP2 />
+        <APP2 columns={['name','start','end','team','progress','duration']} />
       </Gantt>
       {/* <h3>Gantt With Limited Height</h3>
       <Gantt

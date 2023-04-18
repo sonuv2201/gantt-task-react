@@ -158,18 +158,18 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
           return (<g key={index}>
             {
               isTextInside ?
-                <g>
+                <g className="teamLabel">
                   <circle style={{ fill: fillBG }} cx={new_X} cy={task.y + taskHeight * 0.5} r="10"> </circle>
                   <text x={new_X} y={task.y + taskHeight * 0.5} fontSize="0.5em" fill={fillColor} >{item.initial}</text>
                 </g>
                 :
                 item?.initial && item?.initial.length === 1 ?
-                <g>
+                <g className="teamLabel">
                   <circle style={{ fill: fillBG }} cx={new_X + 2} cy={(task.y + taskHeight * 0.5) - 3} r="10"> </circle>
                   <text x={new_X - 1} y={task.y + taskHeight * 0.5} fontSize="0.5em" fill={fillColor} >{item.initial}</text>
                 </g>
                 :
-                <g>
+                <g className="teamLabel">
                 <circle style={{ fill: fillBG }} cx={new_X + 3} cy={(task.y + taskHeight * 0.5) - 3} r="10"> </circle>
                 <text x={new_X - 1} y={task.y + taskHeight * 0.5} fontSize="0.5em" fill={fillColor} >{item.initial}</text>
               </g>

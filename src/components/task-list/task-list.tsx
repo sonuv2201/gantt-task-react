@@ -85,14 +85,16 @@ export const TaskList: React.FC<TaskListProps> = ({
   };
 
   return (
-    <div ref={taskListRef}>
-      <TaskListHeader {...headerProps} {...tableProps} />
-      <div
-        ref={horizontalContainerRef}
-        className={horizontalContainerClass}
-        style={ganttHeight ? { height: ganttHeight } : {}}
-      >
-        <TaskListTable {...tableProps} />
+    <div ref={taskListRef} className="tableWrapper">
+      <div className="tableInnerWrapper">
+        <TaskListHeader {...headerProps} {...tableProps} />
+        <div
+          ref={horizontalContainerRef}
+          className={horizontalContainerClass}
+          style={ganttHeight ? { height: ganttHeight } : {}}
+        >
+          <TaskListTable {...tableProps} />
+        </div>
       </div>
     </div>
   );

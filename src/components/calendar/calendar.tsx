@@ -227,7 +227,7 @@ export const Calendar: React.FC<CalendarProps> = ({
 
       bottomValues.push(
         <g  y={headerHeight * 0.8}
-        x={columnWidth * i + columnWidth * 0.5}>
+        x={columnWidth * i + columnWidth * 0.5} key={date.getTime()}>
           <text
           key={date.getTime()}
           y={headerHeight * 0.8}

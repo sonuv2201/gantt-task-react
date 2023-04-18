@@ -52,14 +52,17 @@ export const TaskListTableDefault: React.FC<{
     const handleTableClick = (t:any,event:any) =>{
       switch (event.detail) {
         case 2:{
-            onExpanderClick(t);
+          HandleOutsideClick(t);
+          setPopupStatus(true)
           break;
         }
       }
     }
 
     const LocalContext = React.useContext(GantContext);
-    const {HandleOutsideClick} = LocalContext;
+    const {HandleOutsideClick,setPopupStatus,propsColumn} = LocalContext;
+
+    console.log(propsColumn.columns);
 
     return (
       <div
@@ -91,11 +94,11 @@ export const TaskListTableDefault: React.FC<{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
                 }}
-                
+                // onClick={(e) => handleTableClick(t,e)}
                 // title={`${t.name}`}
-                onClick={()=>HandleOutsideClick(t)}
+                // onClick={()=>HandleOutsideClick(t)}
               >
-                <div className={`${styles.taskListNameWrapper} taskListNameWrapper`}>
+                <div className={`${styles.taskListNameWrapper} taskListNameWrapper name`}>
                   <div
                     className={
                       expanderSymbol
@@ -109,17 +112,23 @@ export const TaskListTableDefault: React.FC<{
                   <div>{t.name}</div>
                 </div>
               </div>
+
+              { propsColumn && propsColumn.columns.includes('start') && 
               <div
-                className={`${styles.taskListCell} taskListCell`}
-                style={{
-                  minWidth: rowWidth,
-                  maxWidth: rowWidth,
-                }}
-              >
-                &nbsp; {newDateType(t.start)} <span style={{display:'none'}}>{toLocaleDateString(t.start, dateTimeOptions)}</span>
-              </div>
-              <div
-                className={`${styles.taskListCell} taskListCell`}
+              className={`${styles.taskListCell} taskListCell start`}
+              style={{
+                minWidth: rowWidth,
+                maxWidth: rowWidth,
+              }}
+            >
+              &nbsp; {newDateType(t.start)} <span style={{display:'none'}}>{toLocaleDateString(t.start, dateTimeOptions)}</span>
+            </div>
+              }
+              
+
+
+              { propsColumn && propsColumn.columns.includes('end') && <div
+                className={`${styles.taskListCell} taskListCell end`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
@@ -127,10 +136,10 @@ export const TaskListTableDefault: React.FC<{
               >
                 &nbsp; {newDateType(t.end)} {/* {toLocaleDateString(t.end, dateTimeOptions)} */}
               </div>
-
-
-              <div
-                className={`${styles.taskListCell} taskListCell`}
+}
+              
+              { propsColumn && propsColumn.columns.includes('team') && <div
+                className={`${styles.taskListCell} taskListCell team`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
@@ -138,13 +147,47 @@ export const TaskListTableDefault: React.FC<{
                 }}
               >
                 <DisplayExtraFiled t={t} rowWidth={rowWidth} />
+              </div>}
+              
+
+              {
+                propsColumn && propsColumn.columns.includes('progress') && <div
+                className={`${styles.taskListCell} taskListCell progress`}
+                style={{
+                  minWidth: rowWidth,
+                  maxWidth: rowWidth,
+                  position: 'relative'
+                }}
+              >
+                {t.progress}%
               </div>
+              }
+              
+              {
+                propsColumn && propsColumn.columns.includes('duration') && <div
+                className={`${styles.taskListCell} taskListCell duration`}
+                style={{
+                  minWidth: rowWidth,
+                  maxWidth: rowWidth,
+                  position: 'relative'
+                }}
+              >
+                {getDuration(t.start,t.end)}
+              </div>
+              }
+
             </div>
           );
         })}
       </div>
     );
   };
+
+  const getDuration = (start:Date,end:Date) =>{
+    let tempTime = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
+    let day = Math.floor(tempTime);
+    return `${day} ${day > 1 ? 'days' : 'day'}`;
+  }
 
 
   const newDateType = (dateData:Date):String =>{
