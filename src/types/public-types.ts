@@ -22,6 +22,11 @@ export interface TeamType {
 }
 
 
+export interface CommentInterface {
+  id:string,
+  comment:string,
+}
+
 export interface Task {
   id: string;
   type: TaskType;
@@ -29,6 +34,8 @@ export interface Task {
   start: Date;
   end: Date;
   team: TeamType[];
+  description:string,
+  commentList:CommentInterface[],
   extraFieldLabel: string;
   /**
    * From 0 to 100
@@ -60,6 +67,7 @@ export interface EventOption {
    * Invokes on bar double click.
    */
   onDoubleClick?: (task: Task) => void;
+  tableClickHandle?: (task: Task) => void;
   /**
    * Invokes on bar click.
    */
@@ -156,4 +164,10 @@ export interface StylingOption {
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
   tasks: Task[];
+  children?:JSX.Element;
+  extraFunction?: (data:any) => void;
 }
+
+// interface CustomInterface{
+//   extraFunction: (task: Task) => void;
+// }

@@ -226,7 +226,9 @@ export const Calendar: React.FC<CalendarProps> = ({
         .toString()}`;
 
       bottomValues.push(
-        <text
+        <g  y={headerHeight * 0.8}
+        x={columnWidth * i + columnWidth * 0.5}>
+          <text
           key={date.getTime()}
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
@@ -234,6 +236,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         >
           {bottomValue}
         </text>
+        </g>
       );
       if (
         i + 1 !== dates.length &&

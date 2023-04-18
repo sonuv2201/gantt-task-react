@@ -24,6 +24,8 @@ import { HorizontalScroll } from "../other/horizontal-scroll";
 import { removeHiddenTasks, sortTasks } from "../../helpers/other-helper";
 import styles from "./gantt.module.css";
 
+export  const GantContext = React.createContext<any | null>(null);
+
 export const Gantt: React.FunctionComponent<GanttProps> = ({
   tasks,
   headerHeight = 50,
@@ -65,6 +67,9 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
+  tableClickHandle,
+  children,
+  extraFunction,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -97,8 +102,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const [scrollY, setScrollY] = useState(0);
   const [scrollX, setScrollX] = useState(-1);
   const [ignoreScrollEvent, setIgnoreScrollEvent] = useState(false);
-
-  // task change events
+  const [parserData,setParserData] = React.useState();  // task change events
   useEffect(() => {
     let filteredTasks: Task[];
     if (onExpanderClick) {
@@ -142,6 +146,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         milestoneBackgroundSelectedColor
       )
     );
+
+    if(extraFunction){
+      extraFunction(parserData)
+    }
+   
   }, [
     tasks,
     viewMode,
@@ -164,6 +173,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     rtl,
     scrollX,
     onExpanderClick,
+    tableClickHandle,
   ]);
 
   useEffect(() => {
@@ -451,63 +461,79 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     taskListRef,
     setSelectedTask: handleSelectedTask,
     onExpanderClick: handleExpanderClick,
-    onTableClick: onTableClick,
+    // onTableClick: onTableClick,
     TaskListHeader,
     TaskListTable,
   };
+
+  const HandleOutsideClick = (task:any) =>{
+    setParserData(task)
+    if(extraFunction){
+      extraFunction(parserData);
+    }
+  }
+
   return (
-    <div>
-      <div
-        className={styles.wrapper}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-        ref={wrapperRef}
-      >
-        {listCellWidth && <TaskList {...tableProps} />}
-        <TaskGantt
-          gridProps={gridProps}
-          calendarProps={calendarProps}
-          barProps={barProps}
-          ganttHeight={ganttHeight}
-          scrollY={scrollY}
-          scrollX={scrollX}
-        />
-        
-        {ganttEvent.changedTask && (
-          <Tooltip
-            arrowIndent={arrowIndent}
-            rowHeight={rowHeight}
-            svgContainerHeight={svgContainerHeight}
-            svgContainerWidth={svgContainerWidth}
-            fontFamily={fontFamily}
-            fontSize={fontSize}
-            scrollX={scrollX}
+    <GantContext.Provider value={{HandleOutsideClick}}>
+      {
+        children && React.Children.map(children, (child: React.ReactElement) => {
+          return React.cloneElement(child, parserData);
+        })
+      }
+      {/* {children} */}
+      <div>
+        <div
+          className={styles.wrapper}
+          onKeyDown={handleKeyDown}
+          tabIndex={0}
+          ref={wrapperRef}
+        >
+          {listCellWidth && <TaskList {...tableProps} />}
+          <TaskGantt
+            gridProps={gridProps}
+            calendarProps={calendarProps}
+            barProps={barProps}
+            ganttHeight={ganttHeight}
             scrollY={scrollY}
-            task={ganttEvent.changedTask}
-            headerHeight={headerHeight}
-            taskListWidth={taskListWidth}
-            TooltipContent={TooltipContent}
-            rtl={rtl}
-            svgWidth={svgWidth}
+            scrollX={scrollX}
           />
-        )}
-        
-        <VerticalScroll
-          ganttFullHeight={ganttFullHeight}
-          ganttHeight={ganttHeight}
-          headerHeight={headerHeight}
-          scroll={scrollY}
-          onScroll={handleScrollY}
+
+          {ganttEvent.changedTask && (
+            <Tooltip
+              arrowIndent={arrowIndent}
+              rowHeight={rowHeight}
+              svgContainerHeight={svgContainerHeight}
+              svgContainerWidth={svgContainerWidth}
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+              scrollX={scrollX}
+              scrollY={scrollY}
+              task={ganttEvent.changedTask}
+              headerHeight={headerHeight}
+              taskListWidth={taskListWidth}
+              TooltipContent={TooltipContent}
+              rtl={rtl}
+              svgWidth={svgWidth}
+            />
+          )}
+
+          <VerticalScroll
+            ganttFullHeight={ganttFullHeight}
+            ganttHeight={ganttHeight}
+            headerHeight={headerHeight}
+            scroll={scrollY}
+            onScroll={handleScrollY}
+            rtl={rtl}
+          />
+        </div>
+        <HorizontalScroll
+          svgWidth={svgWidth}
+          taskListWidth={taskListWidth}
+          scroll={scrollX}
           rtl={rtl}
+          onScroll={handleScrollX}
         />
       </div>
-      <HorizontalScroll
-        svgWidth={svgWidth}
-        taskListWidth={taskListWidth}
-        scroll={scrollX}
-        rtl={rtl}
-        onScroll={handleScrollX}
-      />
-    </div>
+    </GantContext.Provider>
   );
 };

@@ -70,6 +70,16 @@ const App = () => {
   };
 
 
+  // const extraFunction = (parserData:any):void =>{
+  //   console.log("Hwllo")
+  //   console.log(parserData)
+  // }
+
+  const APP2 = (props:any) =>{
+    console.log(props)
+    return <p>{JSON.stringify(props)}</p>
+  }
+
   return (
     <div className="Wrapper">
       <ViewSwitcher
@@ -90,9 +100,12 @@ const App = () => {
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
-      />
-      
-      <h3>Gantt With Limited Height</h3>
+        barCornerRadius={0}
+        // extraFunction={extraFunction}
+      >
+        <APP2 />
+      </Gantt>
+      {/* <h3>Gantt With Limited Height</h3>
       <Gantt
         tasks={tasks}
         viewMode={view}
@@ -106,7 +119,7 @@ const App = () => {
         listCellWidth={isChecked ? "155px" : ""}
         ganttHeight={300}
         columnWidth={columnWidth}
-      />
+      /> */}
     </div>
   );
 };

@@ -6,6 +6,16 @@
   /*iPad*/
   height: 1.2rem;
 }
+
+.gantTableCell, .taskListCell {
+  font-size: 13px;
+}
+
+:is(.gantTableCell, .taskListCell) * {
+  color: rgba(0,0,0,.87);
+}
+
+
 .scrollWrapper::-webkit-scrollbar {
   width: 1.1rem;
   height: 1.1rem;
@@ -31,3 +41,5 @@
 .scroll {
   height: 1px;
 }
+
+

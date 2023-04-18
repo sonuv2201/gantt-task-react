@@ -28,6 +28,21 @@ export function initTasks() {
       type: "task",
       project: "ProjectSample",
       displayOrder: 2,
+      description:'ABCDDD',
+      commentList:[
+        {
+          id:'1',
+          comment:'AAA'
+        },
+        {
+          id:'2',
+          comment:'BBB'
+        },
+        {
+          id:'3',
+          comment:'CCC'
+        }
+      ],
       extraFieldLabel:'Teamss',
       team: [
         {

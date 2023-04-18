@@ -17,7 +17,7 @@ export type TaskListProps = {
   selectedTask: BarTask | undefined;
   setSelectedTask: (task: string) => void;
   onExpanderClick: (task: Task) => void;
-  onTableClick: (task: Task) => void;
+  // onTableClick: (task: Task) => void;
   TaskListHeader: React.FC<{
     headerHeight: number;
     rowWidth: string;
@@ -34,7 +34,7 @@ export type TaskListProps = {
     selectedTaskId: string;
     setSelectedTask: (taskId: string) => void;
     onExpanderClick: (task: Task) => void;
-    onTableClick: (task: Task) => void;
+    // onTableClick: (task: Task) => void;
   }>;
 };
 
@@ -49,7 +49,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   selectedTask,
   setSelectedTask,
   onExpanderClick,
-  onTableClick,
+  // onTableClick,
   locale,
   ganttHeight,
   taskListRef,
@@ -81,7 +81,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     selectedTaskId: selectedTaskId,
     setSelectedTask,
     onExpanderClick,
-    onTableClick,
+    // onTableClick,
   };
 
   return (

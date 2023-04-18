@@ -21,20 +21,20 @@ export const TaskListHeaderDefault: React.FC<{
 
   return (
     <div
-      className={styles.ganttTable}
+      className={`${styles.ganttTable} ganttTable`}
       style={{
         fontFamily: fontFamily,
         fontSize: fontSize,
       }}
     >
       <div
-        className={styles.ganttTable_Header}
+        className={`${styles.ganttTable_Header} ganttTable_Header`}
         style={{
           height: headerHeight - 2,
         }}
       >
         <div
-          className={styles.ganttTable_HeaderItem}
+          className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem`}
           style={{
             minWidth: rowWidth,
           }}
@@ -42,14 +42,14 @@ export const TaskListHeaderDefault: React.FC<{
           &nbsp;Name
         </div>
         <div
-          className={styles.ganttTable_HeaderSeparator}
+          className={`${styles.ganttTable_HeaderSeparator} ganttTable_HeaderSeparator`}
           style={{
             height: headerHeight * 0.5,
             marginTop: headerHeight * 0.2,
           }}
         />
         <div
-          className={styles.ganttTable_HeaderItem}
+          className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem`}
           style={{
             minWidth: rowWidth,
           }}
@@ -57,14 +57,14 @@ export const TaskListHeaderDefault: React.FC<{
           &nbsp;From
         </div>
         <div
-          className={styles.ganttTable_HeaderSeparator}
+          className={`${styles.ganttTable_HeaderSeparator} ganttTable_HeaderSeparator`}
           style={{
             height: headerHeight * 0.5,
             marginTop: headerHeight * 0.25,
           }}
         />
         <div
-          className={styles.ganttTable_HeaderItem}
+          className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem`}
           style={{
             minWidth: rowWidth,
           }}
@@ -73,7 +73,7 @@ export const TaskListHeaderDefault: React.FC<{
         </div>
 
         <div
-          className={styles.ganttTable_HeaderItem}
+          className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem`}
           style={{
             minWidth: rowWidth,
           }}

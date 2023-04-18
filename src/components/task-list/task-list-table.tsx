@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import styles from "./task-list-table.module.css";
 import { Task } from "../../types/public-types";
 import { TeamType } from "../../types/public-types";
+import { GantContext } from "../gantt/gantt";
+
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
   (locale: string) =>
@@ -31,7 +33,7 @@ export const TaskListTableDefault: React.FC<{
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
-  onTableClick: (task: Task) => void;
+  // onTableClick: (task: Task) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -40,16 +42,24 @@ export const TaskListTableDefault: React.FC<{
   fontSize,
   locale,
   onExpanderClick,
-  onTableClick,
+  // onTableClick,
 }) => {
     const toLocaleDateString = useMemo(
       () => toLocaleDateStringFactory(locale),
       [locale]
     );
 
-    const handleTableClick = (t:any) =>{
-      onExpanderClick(t);
+    const handleTableClick = (t:any,event:any) =>{
+      switch (event.detail) {
+        case 2:{
+            onExpanderClick(t);
+          break;
+        }
+      }
     }
+
+    const LocalContext = React.useContext(GantContext);
+    const {HandleOutsideClick} = LocalContext;
 
     return (
       <div
@@ -60,12 +70,12 @@ export const TaskListTableDefault: React.FC<{
         }}
       >
         {tasks.map(t => {
-          let expanderSymbol = "";
+          let expanderSymbol = null;
           // let teamOpen = false;
           if (t.hideChildren === false) {
-            expanderSymbol = "▼";
+            expanderSymbol = <span className="close table-handle">▼</span>;
           } else if (t.hideChildren === true) {
-            expanderSymbol = "▶";
+            expanderSymbol = <span className="close table-handle">▶</span>;
           }
 
           return (
@@ -73,7 +83,7 @@ export const TaskListTableDefault: React.FC<{
               className={`${styles.taskListTableRow} gantTableRow`}
               style={{ height: rowHeight }}
               key={`${t.id}row`}
-              onClick={() => handleTableClick(t)}
+              onClick={(e) => handleTableClick(t,e)}
             >
               <div
                 className={`${styles.taskListCell} gantTableCell`}
@@ -82,8 +92,8 @@ export const TaskListTableDefault: React.FC<{
                   maxWidth: rowWidth,
                 }}
                 
-                title={`${t.name}`}
-                onClick={()=>onTableClick(t)}
+                // title={`${t.name}`}
+                onClick={()=>HandleOutsideClick(t)}
               >
                 <div className={`${styles.taskListNameWrapper} taskListNameWrapper`}>
                   <div
@@ -100,13 +110,13 @@ export const TaskListTableDefault: React.FC<{
                 </div>
               </div>
               <div
-                className={styles.taskListCell}
+                className={`${styles.taskListCell} taskListCell`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
                 }}
               >
-                &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
+                &nbsp; {newDateType(t.start)} <span style={{display:'none'}}>{toLocaleDateString(t.start, dateTimeOptions)}</span>
               </div>
               <div
                 className={`${styles.taskListCell} taskListCell`}
@@ -115,7 +125,7 @@ export const TaskListTableDefault: React.FC<{
                   maxWidth: rowWidth,
                 }}
               >
-                &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
+                &nbsp; {newDateType(t.end)} {/* {toLocaleDateString(t.end, dateTimeOptions)} */}
               </div>
 
 
@@ -136,6 +146,14 @@ export const TaskListTableDefault: React.FC<{
     );
   };
 
+
+  const newDateType = (dateData:Date):String =>{
+    let tempDate = new Date(dateData);
+    let years = tempDate.getFullYear();
+    let month = tempDate.getMonth()+1;
+    let date = tempDate.getDate();
+    return `${date}/${month}/${years}`;
+  } 
 
 
 const DisplayExtraFiled = ({ t, rowWidth }: any) => {
