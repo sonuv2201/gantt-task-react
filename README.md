@@ -45,7 +45,9 @@ You may handle actions
   onProgressChange={onProgressChange}
   onDoubleClick={onDblClick}
   onClick={onClick}
-/>
+>
+<APP2 columns={['name','start','end','team','progress','duration']} />
+</Gantt>
 ```
 
 ## How to run example
@@ -141,20 +143,24 @@ npm start
 | fontSize       | string   | Specifies the taskbar font size locally.                                                              |
 | project        | string   | Task project name                                                                                     |
 | hideChildren   | bool     | Hide children items. Parameter works with project type |
-| extraFieldLabel   | String     | Extra field Header label |
-| extraField   | array     |  extraField[]  background,color,visibleTable are optional |
-         only     |
-    [
-        {
-          displayValue:'Sonu Progress',
-          initial:'SV',
-          visibleTable:true,
-          background : '#f44336'
-          color : '#fff'
-        },]
-                                             |
-
+| team   | string object array     | Hide children items. Parameter works with project type |
 \*Required  
+
+```json
+  team: [
+          {
+            "name":"user",
+            "username":"User 1",
+            "initial":"U1",
+          },
+          {
+            "name":"User,",
+           "username":"User 2",
+           "initial":"U2",
+        }
+      ]
+```
+
 
 ## License
 
