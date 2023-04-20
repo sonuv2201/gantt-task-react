@@ -467,7 +467,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   };
 
   const HandleOutsideClick = (task:any) =>{
-    console.log(task)
+    // console.log(task)
     setParserData(task)
   }
 
@@ -478,7 +478,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     setPropsColumn(children?.props)
   },[children?.props])
 
-  console.log({children})
+  // console.log({children})
 
   return (
     <GantContext.Provider value={{HandleOutsideClick,setPopupStatus,propsColumn}}>

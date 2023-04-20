@@ -110,7 +110,7 @@ const App = () => {
         <APP2 columns={['name','start','end','team','progress','duration']} />
       </Gantt>
       {/* <h3>Gantt With Limited Height</h3>
-      <Gantt
+      <Gantt 
         tasks={tasks}
         viewMode={view}
         onDateChange={handleTaskChange}

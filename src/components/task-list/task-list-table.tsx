@@ -62,7 +62,7 @@ export const TaskListTableDefault: React.FC<{
     const LocalContext = React.useContext(GantContext);
     const {HandleOutsideClick,setPopupStatus,propsColumn} = LocalContext;
 
-    console.log(propsColumn.columns);
+    // console.log(propsColumn.columns);
 
     return (
       <div
@@ -113,7 +113,7 @@ export const TaskListTableDefault: React.FC<{
                 </div>
               </div>
 
-              { propsColumn && propsColumn.columns.includes('start') && 
+              { propsColumn && propsColumn?.columns?.includes('start') && 
               <div
               className={`${styles.taskListCell} taskListCell start`}
               style={{
@@ -121,24 +121,24 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: rowWidth,
               }}
             >
-              &nbsp; {newDateType(t.start)} <span style={{display:'none'}}>{toLocaleDateString(t.start, dateTimeOptions)}</span>
+              {newDateType(t.start)} <span style={{display:'none'}}>{toLocaleDateString(t.start, dateTimeOptions)}</span>
             </div>
               }
               
 
 
-              { propsColumn && propsColumn.columns.includes('end') && <div
+              { propsColumn && propsColumn?.columns?.includes('end') && <div
                 className={`${styles.taskListCell} taskListCell end`}
                 style={{
                   minWidth: rowWidth,
                   maxWidth: rowWidth,
                 }}
               >
-                &nbsp; {newDateType(t.end)} {/* {toLocaleDateString(t.end, dateTimeOptions)} */}
+                {newDateType(t.end)} {/* {toLocaleDateString(t.end, dateTimeOptions)} */}
               </div>
 }
               
-              { propsColumn && propsColumn.columns.includes('team') && <div
+              { propsColumn && propsColumn?.columns?.includes('team') && <div
                 className={`${styles.taskListCell} taskListCell team`}
                 style={{
                   minWidth: rowWidth,
@@ -151,7 +151,7 @@ export const TaskListTableDefault: React.FC<{
               
 
               {
-                propsColumn && propsColumn.columns.includes('progress') && <div
+                propsColumn && propsColumn?.columns?.includes('progress') && <div
                 className={`${styles.taskListCell} taskListCell progress`}
                 style={{
                   minWidth: rowWidth,
@@ -164,7 +164,7 @@ export const TaskListTableDefault: React.FC<{
               }
               
               {
-                propsColumn && propsColumn.columns.includes('duration') && <div
+                propsColumn && propsColumn?.columns?.includes('duration') && <div
                 className={`${styles.taskListCell} taskListCell duration`}
                 style={{
                   minWidth: rowWidth,

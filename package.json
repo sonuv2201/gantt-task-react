@@ -1,6 +1,6 @@
 {
   "name": "gantt-task-react-with-extra-field",
-  "version": "0.0.4",
+  "version": "0.0.9",
   "description": "Interactive Gantt Chart for React with TypeScript.",
   "author": "MaTeMaTuK <maksym.vikarii@gmail.com>",
   "homepage": "https://github.com/MaTeMaTuK/gantt-task-react",

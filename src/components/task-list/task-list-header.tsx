@@ -53,14 +53,14 @@ export const TaskListHeaderDefault: React.FC<{
           }}
         /> */}
 
-        {propsColumn && propsColumn.columns.includes('start') &&
+        {propsColumn && propsColumn?.columns?.includes('start') &&
           <div
             className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem start`}
             style={{
               minWidth: rowWidth,
             }}
           >
-            &nbsp;From
+            From
           </div>
         }
 
@@ -71,48 +71,48 @@ export const TaskListHeaderDefault: React.FC<{
           }}
         /> */}
 
-        {propsColumn && propsColumn.columns.includes('end') &&
+        {propsColumn && propsColumn?.columns?.includes('end') &&
           <div
             className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem end`}
             style={{
               minWidth: rowWidth,
             }}
           >
-            &nbsp;To
+            To
           </div>
         }
 
 
-        {propsColumn && propsColumn.columns.includes('team') &&
+        {propsColumn && propsColumn?.columns?.includes('team') &&
           <div
             className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem team`}
             style={{
               minWidth: rowWidth,
             }}
           >
-            &nbsp;{customLabel || "Team"}
+            {customLabel || "Team"}
           </div>
         }
 
-        {propsColumn && propsColumn.columns.includes('progress') &&
+        {propsColumn && propsColumn?.columns?.includes('progress') &&
           <div
             className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem progress`}
             style={{
               minWidth: rowWidth,
             }}
           >
-            &nbsp;Progress
+            Progress
           </div>
         }
 
-        {propsColumn && propsColumn.columns.includes('duration') &&
+        {propsColumn && propsColumn?.columns?.includes('duration') &&
           <div
             className={`${styles.ganttTable_HeaderItem} ganttTable_HeaderItem duration`}
             style={{
               minWidth: rowWidth,
             }}
           >
-            &nbsp;Duration
+            Duration
           </div>
         }
 
